@@ -1,34 +1,33 @@
 // ignore_for_file: avoid_print
-
 import 'dart:math';
-import 'dart:io';
 
-class Game { // camel case
-  int? _answer ;
+class Game {
+  static const defaultMaxRandom = 100;
+  int? _answer;
   int _guessCount = 0;
-  int? max;
-  Game({int? maxRandom}){
-    maxRandom ??= 100;
-     max = maxRandom ;
-    _answer = Random().nextInt(max!) + 1 ;
+  static final List<int> guessCountList = [];
+
+  Game({int maxRandom = defaultMaxRandom}) {
+    var r = Random();
+    _answer = r.nextInt(maxRandom) + 1;
   }
+
   int get guessCount {
     return _guessCount;
   }
-  int? get maxNum{
-    return max;
+
+  void addCountList() {
+    guessCountList.add(_guessCount);
   }
-  int doGuess(int num){
-    // ทายถูก return 0
-    // ทายมากไป return 1
-    // ทายน้อยไป return -1
+
+  int doGuess(int num) {
     _guessCount++;
-    if(num > _answer!){
-      return 1 ;
-    }else if (num < _answer!){
-      return -1 ;
-    }else {
-      return 0 ;
+    if (num > _answer!) {
+      return 1;
+    } else if (num < _answer!) {
+      return -1;
+    } else {
+      return 0;
     }
   }
 }
